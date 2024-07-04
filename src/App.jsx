@@ -1,10 +1,11 @@
-import Pokedex from './components/Pokedex'
+import Customroute from "./routers/Customroute";
+
 function App() {
-  return (
-    <>
-      <Pokedex></Pokedex>
-    </>
-  );
+      return (
+            <>
+                  <Customroute></Customroute>
+            </>
+      );
 }
 
 export default App;

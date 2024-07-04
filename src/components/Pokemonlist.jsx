@@ -29,7 +29,6 @@ function Pokemonlist() {
                   axios.get(index.url)
             );//convert array of urls into resolved promises
             const res = await axios.all(resultpromise);
-            console.log(res);
             const arr = res.map((pok) => {
                   return {
                         id: pok.data.id,
@@ -39,6 +38,7 @@ function Pokemonlist() {
                   };
             });//convert response data into array of object of pokecard
             setPokDisplay(arr);//state var array with above arr
+            console.log(arr);
             setIsLoading(false);
       }
 
@@ -57,6 +57,7 @@ function Pokemonlist() {
                                             name={index.name}
                                             image={index.image}
                                             key={index.id}
+                                            id={index.id}
                                       ></Pokemon>
                                 ))}
                   </div>
