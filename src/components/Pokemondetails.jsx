@@ -1,59 +1,41 @@
+import { Link } from "react-router-dom";
+import usePokDetails from "../hooks/usePokDetails";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 function Pokemondetails() {
-      const { id } = useParams();
-      const [cardobj, setCardObj] = useState({});
-      const [typesArray, setTypesArray] = useState([]);
-      const [abilitiesArray, setAbilitiesArray] = useState([]);
-      const [movesArray, setMovesArray] = useState([]);
-      const [audioUrl, setAudioUrl] = useState("");
+      const { audioUrl, cardobj, typesArray, movesArray, abilitiesArray } =
+            usePokDetails();
+
       function playSound() {
             var audio = document.getElementById("myAudio");
             audio.src = audioUrl;
             audio.play();
       }
-      async function pokdet() {
-            window.scrollTo(0, 0);
+      const [similarPokemonsList1, setSimilarPokemonsList1] = useState([]);
+      const [similarPokemonsList2, setSimilarPokemonsList2] = useState([]);
+      async function similarPokemons() {
+            if (typesArray.length === 0) return;
             const response = await axios.get(
-                  `https://pokeapi.co/api/v2/pokemon/${id}`
+                  `https://pokeapi.co/api/v2/type/${typesArray[0].type.name}`
             );
-            console.log(response.data);
-
-            setTypesArray(response.data.types);
-            setAbilitiesArray(response.data.abilities);
-            setMovesArray(response.data.moves);
-            setAudioUrl(
-                  response.data.cries.legacy || response.data.cries.latest
-            );
-
-            const obj = {
-                  name: response.data.name.toUpperCase(),
-                  image:
-                        response.data.sprites.other.dream_world.front_default ||
-                        response.data.sprites.front_default,
-                  height: response.data.height,
-                  weight: response.data.weight,
-                  hp: response.data.stats[0].base_stat,
-                  attack: response.data.stats[1].base_stat,
-                  defence: response.data.stats[2].base_stat,
-                  specialattack: response.data.stats[3].base_stat,
-                  specialdefence: response.data.stats[4].base_stat,
-                  speed: response.data.stats[5].base_stat,
-            };
-            setCardObj(obj);
-            console.log(audioUrl);
-            console.log(obj);
+            console.log(response.data.pokemon[1].pokemon.name);
+            setSimilarPokemonsList1(response.data.pokemon);
+            if (typesArray.length > 1) {
+                  const response1 = await axios.get(
+                        `https://pokeapi.co/api/v2/type/${typesArray[1].type.name}`
+                  );
+                  setSimilarPokemonsList2(response1.data.pokemon);
+            }
       }
 
       useEffect(() => {
-            pokdet();
-      }, []);
+            similarPokemons();
+      }, [typesArray]);
 
       return (
             <>
-                  <div className="m-5 flex flex-col gap-10 text-2xl text-cyan-900">
+                  <div className="m-5 flex flex-col gap-10 text-2xl">
                         <Link to={`http://localhost:5173/`}>
                               <span className="text-4xl material-symbols-outlined fixed">
                                     arrow_back
@@ -64,7 +46,10 @@ function Pokemondetails() {
                                     <h1 className="pl-20 text-5xl">
                                           {cardobj.name}
                                     </h1>
-                                    <button className="flex items-center" onClick={playSound}>
+                                    <button
+                                          className="flex items-center"
+                                          onClick={playSound}
+                                    >
                                           <span className="text-5xl material-symbols-outlined">
                                                 play_circle
                                           </span>
@@ -80,6 +65,7 @@ function Pokemondetails() {
                                                       {typesArray.map(
                                                             (item, index) => (
                                                                   <p
+                                                                        className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400"
                                                                         key={
                                                                               index
                                                                         }
@@ -98,47 +84,47 @@ function Pokemondetails() {
                                                             STATS:
                                                       </h1>
                                                       <div className="flex flex-wrap justify-evenly gap-x-16 gap-y-10">
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   hp-
                                                                   {cardobj.hp}
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   speed-
                                                                   {
                                                                         cardobj.speed
                                                                   }
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   height-
                                                                   {
                                                                         cardobj.height
                                                                   }
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   weight-
                                                                   {
                                                                         cardobj.weight
                                                                   }
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   attack-
                                                                   {
                                                                         cardobj.attack
                                                                   }
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   defence-
                                                                   {
                                                                         cardobj.defence
                                                                   }
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   special-attack-
                                                                   {
                                                                         cardobj.specialattack
                                                                   }
                                                             </p>
-                                                            <p>
+                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
                                                                   special-defence-
                                                                   {
                                                                         cardobj.specialdefence
@@ -161,7 +147,10 @@ function Pokemondetails() {
                                           <div className="flex flex-wrap justify-evenly gap-x-16 gap-y-10">
                                                 {abilitiesArray.map(
                                                       (item, index) => (
-                                                            <p key={index}>
+                                                            <p
+                                                                  className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400"
+                                                                  key={index}
+                                                            >
                                                                   {
                                                                         item
                                                                               .ability
@@ -179,7 +168,10 @@ function Pokemondetails() {
                                           <div className="flex flex-wrap justify-evenly gap-x-16 gap-y-10">
                                                 {movesArray.map(
                                                       (item, index) => (
-                                                            <p key={index}>
+                                                            <p
+                                                                  className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400"
+                                                                  key={index}
+                                                            >
                                                                   {
                                                                         item
                                                                               .move
@@ -189,6 +181,46 @@ function Pokemondetails() {
                                                       )
                                                 )}
                                           </div>
+                                    </div>
+                                    <div className="flex flex-col gap-5 items-center justify-center border-8 p-5 border-slate-600 rounded-lg">
+                                    {typesArray.length>0?<div>
+                                          <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">{typesArray[0].type.name} type pokemons</h1>
+                                          <ul className="list-disc flex flex-wrap">
+                                                {similarPokemonsList1.map(
+                                                      (pokemon, index) => (
+                                                            <li
+                                                                  className="m-10"
+                                                                  key={index}
+                                                            >
+                                                                  {
+                                                                        pokemon
+                                                                              .pokemon
+                                                                              .name
+                                                                  }
+                                                            </li>
+                                                      )
+                                                )}
+                                          </ul>
+                                          </div>:<></>}
+                                          {typesArray.length>1?<div>
+                                          <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">{typesArray[1].type.name} type pokemons</h1>
+                                          <ul className="list-disc flex flex-wrap">
+                                                {similarPokemonsList2.map(
+                                                      (pokemon, index) => (
+                                                            <li
+                                                                  className="m-10"
+                                                                  key={index}
+                                                            >
+                                                                  {
+                                                                        pokemon
+                                                                              .pokemon
+                                                                              .name
+                                                                  }
+                                                            </li>
+                                                      )
+                                                )}
+                                          </ul>
+                                          </div>:<></>}
                                     </div>
                               </div>
                         </div>
