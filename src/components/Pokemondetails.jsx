@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import usePokDetails from "../hooks/usePokDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Pokemondetails() {
+      const navigate = useNavigate();
       const { audioUrl, cardobj, typesArray, movesArray, abilitiesArray } =
             usePokDetails();
+
+      function changecard(pokemonname) {
+            console.log("hello");
+            navigate(`/pokemon/${pokemonname}`);
+      }
 
       function playSound() {
             var audio = document.getElementById("myAudio");
@@ -19,7 +25,6 @@ function Pokemondetails() {
             const response = await axios.get(
                   `https://pokeapi.co/api/v2/type/${typesArray[0].type.name}`
             );
-            console.log(response.data.pokemon[1].pokemon.name);
             setSimilarPokemonsList1(response.data.pokemon);
             if (typesArray.length > 1) {
                   const response1 = await axios.get(
@@ -31,6 +36,7 @@ function Pokemondetails() {
 
       useEffect(() => {
             similarPokemons();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [typesArray]);
 
       return (
@@ -183,44 +189,90 @@ function Pokemondetails() {
                                           </div>
                                     </div>
                                     <div className="flex flex-col gap-5 items-center justify-center border-8 p-5 border-slate-600 rounded-lg">
-                                    {typesArray.length>0?<div>
-                                          <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">{typesArray[0].type.name} type pokemons</h1>
-                                          <ul className="list-disc flex flex-wrap">
-                                                {similarPokemonsList1.map(
-                                                      (pokemon, index) => (
-                                                            <li
-                                                                  className="m-10"
-                                                                  key={index}
-                                                            >
-                                                                  {
-                                                                        pokemon
-                                                                              .pokemon
-                                                                              .name
-                                                                  }
-                                                            </li>
-                                                      )
-                                                )}
-                                          </ul>
-                                          </div>:<></>}
-                                          {typesArray.length>1?<div>
-                                          <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">{typesArray[1].type.name} type pokemons</h1>
-                                          <ul className="list-disc flex flex-wrap">
-                                                {similarPokemonsList2.map(
-                                                      (pokemon, index) => (
-                                                            <li
-                                                                  className="m-10"
-                                                                  key={index}
-                                                            >
-                                                                  {
-                                                                        pokemon
-                                                                              .pokemon
-                                                                              .name
-                                                                  }
-                                                            </li>
-                                                      )
-                                                )}
-                                          </ul>
-                                          </div>:<></>}
+                                          {typesArray.length > 0 ? (
+                                                <div>
+                                                      <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">
+                                                            {
+                                                                  typesArray[0]
+                                                                        .type
+                                                                        .name
+                                                            }{" "}
+                                                            type pokemons
+                                                      </h1>
+                                                      <ul className="list-disc flex flex-wrap">
+                                                            {similarPokemonsList1.map(
+                                                                  (
+                                                                        pokemon,
+                                                                        index
+                                                                  ) => (
+                                                                        <li
+                                                                              onClick={() =>
+                                                                                    changecard(
+                                                                                          pokemon
+                                                                                                .pokemon
+                                                                                                .name
+                                                                                    )
+                                                                              }
+                                                                              className="m-10"
+                                                                              key={
+                                                                                    index
+                                                                              }
+                                                                        >
+                                                                              {
+                                                                                    pokemon
+                                                                                          .pokemon
+                                                                                          .name
+                                                                              }
+                                                                        </li>
+                                                                  )
+                                                            )}
+                                                      </ul>
+                                                </div>
+                                          ) : (
+                                                <></>
+                                          )}
+                                          {typesArray.length > 1 ? (
+                                                <div>
+                                                      <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">
+                                                            {
+                                                                  typesArray[1]
+                                                                        .type
+                                                                        .name
+                                                            }{" "}
+                                                            type pokemons
+                                                      </h1>
+                                                      <ul className="list-disc flex flex-wrap">
+                                                            {similarPokemonsList2.map(
+                                                                  (
+                                                                        pokemon,
+                                                                        index
+                                                                  ) => (
+                                                                        <li
+                                                                              onClick={() =>
+                                                                                    changecard(
+                                                                                          pokemon
+                                                                                                .pokemon
+                                                                                                .name
+                                                                                    )
+                                                                              }
+                                                                              className="m-10"
+                                                                              key={
+                                                                                    index
+                                                                              }
+                                                                        >
+                                                                              {
+                                                                                    pokemon
+                                                                                          .pokemon
+                                                                                          .name
+                                                                              }
+                                                                        </li>
+                                                                  )
+                                                            )}
+                                                      </ul>
+                                                </div>
+                                          ) : (
+                                                <></>
+                                          )}
                                     </div>
                               </div>
                         </div>

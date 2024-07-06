@@ -44,7 +44,7 @@ function usePokDetails() {
       useEffect(() => {
             pokdet();
             // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+      }, [id]);
       return {audioUrl, cardobj, typesArray, movesArray, abilitiesArray};
 }
 export default usePokDetails;
