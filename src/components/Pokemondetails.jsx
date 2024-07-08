@@ -1,17 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import usePokDetails from "../hooks/usePokDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../css/bar.css";
+import Moves from "./Moves";
+import Types from "./Types";
 
 function Pokemondetails() {
-      const navigate = useNavigate();
       const { audioUrl, cardobj, typesArray, movesArray, abilitiesArray } =
             usePokDetails();
-
-      function changecard(pokemonname) {
-            console.log("hello");
-            navigate(`/pokemon/${pokemonname}`);
-      }
 
       function playSound() {
             var audio = document.getElementById("myAudio");
@@ -41,7 +38,7 @@ function Pokemondetails() {
 
       return (
             <>
-                  <div className="m-5 flex flex-col gap-10 text-2xl">
+                  <div className="text-white m-5 flex flex-col gap-10 text-2xl">
                         <Link to={`http://localhost:5173/`}>
                               <span className="text-4xl material-symbols-outlined fixed">
                                     arrow_back
@@ -66,7 +63,7 @@ function Pokemondetails() {
                                           <div className="flex flex-col gap-3 w-[800px]">
                                                 <div className="text-2xl flex justify-evenly border-8 p-5 border-slate-600 rounded-lg">
                                                       <p className="text-2xl font-extrabold ">
-                                                            TYPES:
+                                                            TYPES
                                                       </p>
                                                       {typesArray.map(
                                                             (item, index) => (
@@ -87,55 +84,167 @@ function Pokemondetails() {
                                                 </div>
                                                 <div className="flex flex-col gap-5 items-center justify-center border-8 p-5 border-slate-600 rounded-lg">
                                                       <h1 className="text-2xl font-extrabold">
-                                                            STATS:
+                                                            BASE STATS
                                                       </h1>
                                                       <div className="flex flex-wrap justify-evenly gap-x-16 gap-y-10">
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  hp-
-                                                                  {cardobj.hp}
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  speed-
-                                                                  {
-                                                                        cardobj.speed
-                                                                  }
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  height-
-                                                                  {
-                                                                        cardobj.height
-                                                                  }
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  weight-
-                                                                  {
-                                                                        cardobj.weight
-                                                                  }
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  attack-
-                                                                  {
-                                                                        cardobj.attack
-                                                                  }
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  defence-
-                                                                  {
-                                                                        cardobj.defence
-                                                                  }
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  special-attack-
-                                                                  {
-                                                                        cardobj.specialattack
-                                                                  }
-                                                            </p>
-                                                            <p className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400">
-                                                                  special-defence-
-                                                                  {
-                                                                        cardobj.specialdefence
-                                                                  }
-                                                            </p>
+                                                            <div className="flex w-full">
+                                                                  <div className="w-[300px] flex justify-center px-6 items-center h-10 bg-blue-800 text-lg font-extrabold text-blue-100 text-center p-0.5 leading-none rounded-bl-lg rounded-tl-lg">
+                                                                        <p className="text-white">
+                                                                              HP
+                                                                        </p>
+                                                                  </div>
+                                                                  <div className="flex w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700">
+                                                                        <div
+                                                                              className="bar flex justify-end px-6 items-center h-10 bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-br-lg rounded-tr-lg"
+                                                                              style={{
+                                                                                    width: `${
+                                                                                          (cardobj.hp /
+                                                                                                255) *
+                                                                                          100
+                                                                                    }%`,
+                                                                                    transition:
+                                                                                          "width 1s ease-in-out",
+                                                                              }}
+                                                                        >
+                                                                              {
+                                                                                    cardobj.hp
+                                                                              }
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="flex w-full">
+                                                                  <div className="w-[300px] flex justify-center px-6 items-center h-10 bg-blue-800 text-lg font-extrabold text-blue-100 text-center p-0.5 leading-none rounded-bl-lg rounded-tl-lg">
+                                                                        <p className="text-white">
+                                                                              SPEED
+                                                                        </p>
+                                                                  </div>
+                                                                  <div className="flex w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700">
+                                                                        <div
+                                                                              className="bar flex justify-end px-6 items-center h-10 bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-br-lg rounded-tr-lg"
+                                                                              style={{
+                                                                                    width: `${
+                                                                                          (cardobj.speed /
+                                                                                                180) *
+                                                                                          100
+                                                                                    }%`,
+                                                                                    transition:
+                                                                                          "width 1s ease-in-out",
+                                                                              }}
+                                                                        >
+                                                                              {
+                                                                                    cardobj.speed
+                                                                              }
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="flex w-full">
+                                                                  <div className="w-[300px] flex justify-center px-6 items-center h-10 bg-blue-800 text-lg font-extrabold text-blue-100 text-center p-0.5 leading-none rounded-bl-lg rounded-tl-lg">
+                                                                        <p className="text-white">
+                                                                              ATTACK
+                                                                        </p>
+                                                                  </div>
+                                                                  <div className="flex w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700">
+                                                                        <div
+                                                                              className="bar flex justify-end px-6 items-center h-10 bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-br-lg rounded-tr-lg"
+                                                                              style={{
+                                                                                    width: `${
+                                                                                          (cardobj.attack /
+                                                                                                190) *
+                                                                                          100
+                                                                                    }%`,
+                                                                                    transition:
+                                                                                          "width 1s ease-in-out",
+                                                                              }}
+                                                                        >
+                                                                              {
+                                                                                    cardobj.attack
+                                                                              }
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="flex w-full">
+                                                                  <div className="w-[300px] flex justify-center px-6 items-center h-10 bg-blue-800 text-lg font-extrabold text-blue-100 text-center p-0.5 leading-none rounded-bl-lg rounded-tl-lg">
+                                                                        <p className="text-white">
+                                                                              DEFENCE
+                                                                        </p>
+                                                                  </div>
+                                                                  <div className="flex w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700">
+                                                                        <div
+                                                                              className="bar flex justify-end px-6 items-center h-10 bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-br-lg rounded-tr-lg"
+                                                                              style={{
+                                                                                    width: `${
+                                                                                          (cardobj.defence /
+                                                                                                230) *
+                                                                                          100
+                                                                                    }%`,
+                                                                                    transition:
+                                                                                          "width 1s ease-in-out",
+                                                                              }}
+                                                                        >
+                                                                              {
+                                                                                    cardobj.defence
+                                                                              }
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="flex w-full">
+                                                                  <div className="w-[300px] flex justify-center px-6 items-center h-10 bg-blue-800 text-lg font-extrabold text-blue-100 text-center p-0.5 leading-none rounded-bl-lg rounded-tl-lg">
+                                                                        <p className="text-white">
+                                                                              SP. ATTACK
+                                                                        </p>
+                                                                  </div>
+                                                                  <div className="flex w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700">
+                                                                        <div
+                                                                              className="bar flex justify-end px-6 items-center h-10 bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-br-lg rounded-tr-lg"
+                                                                              style={{
+                                                                                    width: `${
+                                                                                          (cardobj.specialattack /
+                                                                                                194) *
+                                                                                          100
+                                                                                    }%`,
+                                                                                    transition:
+                                                                                          "width 1s ease-in-out",
+                                                                              }}
+                                                                        >
+                                                                              {
+                                                                                    cardobj.specialattack
+                                                                              }
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="flex w-full">
+                                                                  <div className="w-[300px] flex justify-center px-6 items-center h-10 bg-blue-800 text-lg font-extrabold text-blue-100 text-center p-0.5 leading-none rounded-bl-lg rounded-tl-lg">
+                                                                        <p className="text-white">
+                                                                              SP. DEFENCE
+                                                                        </p>
+                                                                  </div>
+                                                                  <div className="flex w-full h-10 bg-gray-200 rounded-lg dark:bg-gray-700">
+                                                                        <div
+                                                                              className="bar flex justify-end px-6 items-center h-10 bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-br-lg rounded-tr-lg"
+                                                                              style={{
+                                                                                    width: `${
+                                                                                          (cardobj.specialdefence /
+                                                                                                230) *
+                                                                                          100
+                                                                                    }%`,
+                                                                                    transition:
+                                                                                          "width 1s ease-in-out",
+                                                                              }}
+                                                                        >
+                                                                              {
+                                                                                    cardobj.specialdefence
+                                                                              }
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="flex justify-center items-center w-2/5 text-lg font-extrabold">
+                                                                  <div className="bg-blue-800 flex justify-center w-1/2 p-1 rounded-bl-lg rounded-tl-lg">HEIGHT</div>
+                                                                  <div className="bg-blue-600 flex justify-center w-1/2 p-1 rounded-br-lg rounded-tr-lg font-medium">{cardobj.height}</div>
+                                                            </div>
+                                                            <div className="flex justify-center items-center w-2/5 text-lg font-extrabold">
+                                                                  <div className="bg-blue-800 flex justify-center w-1/2 p-1 rounded-bl-lg rounded-tl-lg">WEIGHT</div>
+                                                                  <div className="bg-blue-600 flex justify-center w-1/2 p-1 rounded-br-lg rounded-tr-lg font-medium">{cardobj.weight}</div>
+                                                            </div>
                                                       </div>
                                                 </div>
                                           </div>
@@ -148,7 +257,7 @@ function Pokemondetails() {
                                     </div>
                                     <div className="flex flex-col gap-5 items-center justify-center border-8 p-5 border-slate-600 rounded-lg">
                                           <h1 className="text-2xl font-extrabold">
-                                                ABILITIES:
+                                                ABILITIES
                                           </h1>
                                           <div className="flex flex-wrap justify-evenly gap-x-16 gap-y-10">
                                                 {abilitiesArray.map(
@@ -167,113 +276,8 @@ function Pokemondetails() {
                                                 )}
                                           </div>
                                     </div>
-                                    <div className="flex flex-col gap-5 items-center justify-center border-8 p-5 border-slate-600 rounded-lg">
-                                          <h1 className="text-2xl font-extrabold">
-                                                MOVES:
-                                          </h1>
-                                          <div className="flex flex-wrap justify-evenly gap-x-16 gap-y-10">
-                                                {movesArray.map(
-                                                      (item, index) => (
-                                                            <p
-                                                                  className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400"
-                                                                  key={index}
-                                                            >
-                                                                  {
-                                                                        item
-                                                                              .move
-                                                                              .name
-                                                                  }
-                                                            </p>
-                                                      )
-                                                )}
-                                          </div>
-                                    </div>
-                                    <div className="flex flex-col gap-5 items-center justify-center border-8 p-5 border-slate-600 rounded-lg">
-                                          {typesArray.length > 0 ? (
-                                                <div>
-                                                      <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">
-                                                            {
-                                                                  typesArray[0]
-                                                                        .type
-                                                                        .name
-                                                            }{" "}
-                                                            type pokemons
-                                                      </h1>
-                                                      <ul className="list-disc flex flex-wrap">
-                                                            {similarPokemonsList1.map(
-                                                                  (
-                                                                        pokemon,
-                                                                        index
-                                                                  ) => (
-                                                                        <li
-                                                                              onClick={() =>
-                                                                                    changecard(
-                                                                                          pokemon
-                                                                                                .pokemon
-                                                                                                .name
-                                                                                    )
-                                                                              }
-                                                                              className="m-10"
-                                                                              key={
-                                                                                    index
-                                                                              }
-                                                                        >
-                                                                              {
-                                                                                    pokemon
-                                                                                          .pokemon
-                                                                                          .name
-                                                                              }
-                                                                        </li>
-                                                                  )
-                                                            )}
-                                                      </ul>
-                                                </div>
-                                          ) : (
-                                                <></>
-                                          )}
-                                          {typesArray.length > 1 ? (
-                                                <div>
-                                                      <h1 className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400 text-2xl font-extrabold">
-                                                            {
-                                                                  typesArray[1]
-                                                                        .type
-                                                                        .name
-                                                            }{" "}
-                                                            type pokemons
-                                                      </h1>
-                                                      <ul className="list-disc flex flex-wrap">
-                                                            {similarPokemonsList2.map(
-                                                                  (
-                                                                        pokemon,
-                                                                        index
-                                                                  ) => (
-                                                                        <li
-                                                                              onClick={() =>
-                                                                                    changecard(
-                                                                                          pokemon
-                                                                                                .pokemon
-                                                                                                .name
-                                                                                    )
-                                                                              }
-                                                                              className="m-10"
-                                                                              key={
-                                                                                    index
-                                                                              }
-                                                                        >
-                                                                              {
-                                                                                    pokemon
-                                                                                          .pokemon
-                                                                                          .name
-                                                                              }
-                                                                        </li>
-                                                                  )
-                                                            )}
-                                                      </ul>
-                                                </div>
-                                          ) : (
-                                                <></>
-                                          )}
-                                    </div>
+                                    <Moves array={movesArray}></Moves>
+                                    <Types typesArray={typesArray} similarPokemonsList1={similarPokemonsList1} similarPokemonsList2={similarPokemonsList2}></Types>
                               </div>
                         </div>
                   </div>
