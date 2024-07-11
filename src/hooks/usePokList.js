@@ -33,13 +33,13 @@ function usePokList()
               return {
                     id: pok.data.id,
                     name: pok.data.name,
-                    image: pok.data.sprites.other.dream_world.front_default,
+                    image: pok.data.sprites.other.home.front_default ||
+                    pok.data.sprites.front_default,
                     types: pok.data.types,
               };
         });//convert response data into array of object of pokecard
         setPokDisplay(arr);//state var array with above arr
         console.log(arr);
-        console.log(pokeurl)
         setIsLoading(false);
   }
 

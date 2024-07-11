@@ -1,0 +1,235 @@
+.green {
+    background-color: green;
+    color: white;
+}
+
+.darkgreen {
+    background-color: #0f600f;
+    color: white;
+}
+
+.red {
+    background-color: red;
+}
+
+.darkred {
+    background-color: darkred;
+}
+
+.black {
+    background-color: #141414;
+    border:2px solid white;
+    color:white
+}
+
+.darkblack {
+    background-color: #0b0b0b;
+    border:2px solid white;
+}
+
+.blue {
+    background-color: darkblue;
+}
+
+.darkblue {
+    background-color: #00006d;
+}
+
+.brown {
+    background-color: #631818;
+}
+
+.darkbrown {
+    background-color: #3b0d0d;
+}
+
+.gray {
+    background-color: #808080;
+}
+
+.darkgray {
+    background-color: #505050;
+}
+
+.pink {
+    background-color: #e9a6b1;
+}
+
+.darkpink {
+    background-color: #ae6a76;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.darkpurple {
+    background-color: #600060;
+}
+
+.white {
+    background-color: white;
+}
+
+.darkwhite {
+    background-color: #929292;
+}
+.slate{
+    background-color: #505050;
+}
+.darkslate{
+    background-color: #28292b;
+}
+
+.yellow {
+    background-color: #c4c436;
+    color: black;
+}
+
+.darkyellow {
+    background-color: #908a2a;
+    color:black;
+    
+}
+
+.greenborder {
+    border: 8px solid green;
+}
+
+.redborder {
+    border: 8px solid red;
+}
+
+.blackborder {
+    border: 8px solid rgb(147, 147, 147);
+}
+
+.blueborder {
+    border: 8px solid darkblue;
+}
+
+.brownborder {
+    border: 8px solid #631818;
+}
+
+.grayborder {
+    border: 8px solid #808080;
+}
+
+.pinkborder {
+    border: 8px solid #e9a6b1;
+}
+
+.purpleborder {
+    border: 8px solid purple;
+}
+
+.whiteborder {
+    border: 8px solid white;
+    color: black;
+}
+
+.yellowborder {
+    border: 8px solid #c4c436;
+}
+.slateborder{
+    border: 8px solid #656565;
+}
+.greenbg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(0, 60, 21) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.redbg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(122, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.blackbg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(0, 0, 0) 0%,
+        rgba(33, 33, 33, 1) 85%
+    );
+}
+
+.bluebg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(0, 0, 83) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.brownbg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(58, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.graybg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(78, 78, 78) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.pinkbg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(165, 118, 127) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.purplebg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(84, 0, 84) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+
+.whitebg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        90deg,
+        rgb(61, 61, 61) 0%,
+        rgb(156, 156, 156) 85%
+    );
+}
+
+.yellowbg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(132, 132, 0) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+.slatebg {
+    background: rgb(249, 249, 249);
+    background: linear-gradient(
+        -90deg,
+        rgb(73, 73, 73) 0%,
+        rgba(0, 0, 0, 1) 85%
+    );
+}
+

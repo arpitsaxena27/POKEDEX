@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 function Buttons({ previous, next }) {
   return (
     <div className="flex justify-center items-center gap-10">
-      <button onClick={previous} className="px-3 py-1 bg-slate-200 text-2xl border-2 border-slate-700 rounded-md">Prev</button>
-      <button onClick={next} className="px-3 py-1 bg-slate-200 text-2xl border-2 border-slate-700 rounded-md">Next</button>
+      <button onClick={previous} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-[#101010] shadow-md shadow-gray-700">Prev</button>
+      <button onClick={next} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-[#101010] shadow-md shadow-gray-700">Next</button>
     </div>
   );
 }

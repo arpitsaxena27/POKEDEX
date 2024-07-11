@@ -25,7 +25,7 @@ function Search() {
             <div className="flex justify-center items-center mt-6">
                   <input
                         type="text"
-                        className="w-1/2 border-2 px-3 py-1 border-black rounded-md input input-bordered w-full max-w-xs"
+                        className="border-2 py-0 md:py-3 lg:py-3 h-8 px-3 border-black rounded-md input input-bordered w-56 md:w-full lg:w-full max-w-xs"
                         placeholder="enter pokemon name"
                         onChange={debounceCallBack}
                         name="search"

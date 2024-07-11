@@ -1,3 +1,4 @@
+/* eslint-disable no-inner-declarations */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +8,10 @@ function usePokDetails() {
       const [typesArray, setTypesArray] = useState([]);
       const [abilitiesArray, setAbilitiesArray] = useState([]);
       const [movesArray, setMovesArray] = useState([]);
+      const [des, setDes] = useState([]);
+      const [habitat, setHabitat] = useState("Unknown");
       const [audioUrl, setAudioUrl] = useState("");
+      const [color, setColor] = useState("slate");
       async function pokdet() {
             window.scrollTo(0, 0);
             const response = await axios.get(
@@ -25,7 +29,7 @@ function usePokDetails() {
             const obj = {
                   name: response.data.name.toUpperCase(),
                   image:
-                        response.data.sprites.other.dream_world.front_default ||
+                        response.data.sprites.other.home.front_default ||
                         response.data.sprites.front_default,
                   height: response.data.height,
                   weight: response.data.weight,
@@ -37,14 +41,47 @@ function usePokDetails() {
                   speed: response.data.stats[5].base_stat,
             };
             setCardObj(obj);
-            console.log(audioUrl);
             console.log(obj);
+      }
+      async function pokcolor() {
+            try {
+                  const response = await axios.get(
+                        `https://pokeapi.co/api/v2/pokemon-species/${id}`
+                  );
+                  console.log(response.data.habitat.name);
+                  if (response.data.color.name) setColor(response.data.color.name);
+                  else setColor("slate");
+                  function replaceFormFeedWithSpace(input) {
+                        return input.replace(/\f/g, " ");
+                  }
+      
+                  const inputString =
+                        response.data.flavor_text_entries[3].flavor_text ||
+                        response.data.flavor_text_entries[0].flavor_text;
+                  const resultString = replaceFormFeedWithSpace(inputString);
+      
+                  setDes(resultString);
+                  setHabitat(response.data.habitat.name);
+            } catch (error) {
+                  console.log("data not found")
+            }
       }
 
       useEffect(() => {
             pokdet();
+            pokcolor();
             // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [id]);
-      return {audioUrl, cardobj, typesArray, movesArray, abilitiesArray};
+      return {
+            audioUrl,
+            cardobj,
+            typesArray,
+            movesArray,
+            abilitiesArray,
+            color,
+            des,
+            habitat,
+            id,
+      };
 }
 export default usePokDetails;

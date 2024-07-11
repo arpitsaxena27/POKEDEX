@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-function Moves({ array }) {
+function Moves({ array,color }) {
       const [expanded, setExpanded] = useState(false);
 
       const toggleExpand = () => {
@@ -8,29 +8,55 @@ function Moves({ array }) {
       };
       return (
             <>
-                  <div className="flex flex-col justify-center items-center border-8 border-slate-600">
+                  <div className={`flex flex-col justify-center items-center rounded-lg ${color}border`}>
                         <div className="flex flex-col overflow-hidden gap-5 items-center justify-center p-5  rounded-lg">
                               <h1 className="text-2xl font-extrabold">MOVES</h1>
                               <div
-                                    className={`flex ${
-                                          expanded ? "h-full" : "h-28"
-                                    } flex-wrap justify-evenly gap-x-16 gap-y-10`}
+                                    className={`${
+                                          expanded ? "h-full" : "h-32"
+                                    } flex flex-wrap justify-center items-center`}
                               >
-                                    {array.map((item, index) => (
-                                          <p
-                                                className="bg-slate-600 rounded-lg py-1 px-5 text-slate-400"
-                                                key={index}
-                                          >
-                                                {item.move.name}
+                                    {array.length ? (
+                                          array.map((item, index) => (
+                                                <p
+                                                      className={`${color} text-[15px] md:text-xl lg:text-2xl m-1 w-full md:w-[48%] lg:w-[48%] rounded-lg py-1 px-5`}
+                                                      key={index}
+                                                >
+                                                      {item.move.name}
+                                                </p>
+                                          ))
+                                    ) : (
+                                          <p>
+                                                no moves are present in database
                                           </p>
-                                    ))}
+                                    )}
                               </div>
                         </div>
                         <button
-                              className="mt-4 mb-4 px-4 py-2 bg-blue-700 text-white rounded"
+                              className={`mt-4 flex justify-center items-center mb-4 ${color} text-white rounded-full`}
                               onClick={toggleExpand}
                         >
-                              {expanded ? "Collapse" : "Expand"}
+                              {expanded ? (
+                                    <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          height="48px"
+                                          viewBox="0 -960 960 960"
+                                          width="48px"
+                                          fill="#e8eaed"
+                                    >
+                                          <path d="m280-400 200-201 200 201H280Z" />
+                                    </svg>
+                              ) : (
+                                    <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          height="48px"
+                                          viewBox="0 -960 960 960"
+                                          width="48px"
+                                          fill="#e8eaed"
+                                    >
+                                          <path d="M480-360 280-559h400L480-360Z" />
+                                    </svg>
+                              )}
                         </button>
                   </div>
             </>
