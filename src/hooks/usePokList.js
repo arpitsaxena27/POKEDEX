@@ -1,29 +1,26 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-let p, n;
 
-function usePokList()
-{
-    const [pokeurl, setPokeUrl] = useState(
-        "https://pokeapi.co/api/v2/pokemon"
-  );//state var to store link of 20 pokemons
+      const usePokList = (initialPage = 1, limit = 20) => {
+            const [currentPage, setCurrentPage] = useState(initialPage);
+            const [totalPages, setTotalPages] = useState(0);
+            const [previousPage, setPreviousPage] = useState(null);
+            const [nextPage, setNextPage] = useState(null);
+
   const [pokDisplay, setPokDisplay] = useState([]);//state var array to store card of pokemons
   const [isLoading, setIsLoading] = useState(true);//var to check data is loaded or not
-
-  function previous() {
-        setPokeUrl(p);
-  }//prev button function to set pokeurl with list of prev 20 pokemons
-  function next() {
-        setPokeUrl(n);
-  }//next button function to set pokeurl with list of next 20 pokemons
-
+  
   async function apiCall() {
-        setIsLoading(true);
-        const response = await axios.get(pokeurl);//get response from api
-        console.log(response);
-        p = response.data.previous;//get prev 20 pokemons link
-        n = response.data.next;//get next 20 pokemons link
+      setIsLoading(true);
+      const offset = (currentPage - 1) * limit;
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+        );
+        setTotalPages(Math.ceil(response.data.count / limit));
+        setPreviousPage(response.data.previous);
+        setNextPage(response.data.next);
         const pokemonresult = response.data.results;//array of obj contain pokemon name and url for details of that pokemon
         const resultpromise = pokemonresult.map((index) =>
               axios.get(index.url)
@@ -40,14 +37,26 @@ function usePokList()
         });//convert response data into array of object of pokecard
         setPokDisplay(arr);//state var array with above arr
         console.log(arr);
+      } catch (error) {
+        console.error("Error fetching Pokemon data:", error);
+      } finally {
         setIsLoading(false);
+      }
   }
 
   useEffect(() => {
         apiCall();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokeurl]);//useEffect hook to call apicall function when pokeurl is updated
+  }, [currentPage, limit]);//useEffect hook to call apicall function when pokeurl is updated
 
-  return {isLoading,pokDisplay,previous,next}
+  return {
+      isLoading,
+      pokDisplay,
+      currentPage,
+      totalPages,
+      previousPage,
+      nextPage,
+      setCurrentPage,
+    };
 }
 export default usePokList;

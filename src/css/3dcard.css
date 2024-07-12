@@ -16,3 +16,16 @@
 .card-back {
     transform: rotateX(180deg);
 }
+
+/* .bookmark-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bookmark-button:hover {
+    background-color: #e0e0e0;
+} */

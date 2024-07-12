@@ -26,7 +26,7 @@ function Search() {
                   <input
                         type="text"
                         className="border-2 py-0 md:py-3 lg:py-3 h-8 px-3 border-black rounded-md input input-bordered w-56 md:w-full lg:w-full max-w-xs"
-                        placeholder="enter pokemon name"
+                        placeholder="Enter pokemon name"
                         onChange={debounceCallBack}
                         name="search"
                         id="search"

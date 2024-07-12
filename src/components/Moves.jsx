@@ -27,7 +27,7 @@ function Moves({ array,color }) {
                                           ))
                                     ) : (
                                           <p>
-                                                no moves are present in database
+                                                This Pokemon&apos;s moves are still a mystery.
                                           </p>
                                     )}
                               </div>
