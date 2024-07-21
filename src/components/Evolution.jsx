@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Evolution({ id  ,obj}) {
+function Evolution({ id}) {
       const [imageUrl3, setImageUrl3] = useState("");
       const [imageUrl2, setImageUrl2] = useState("");
       const [imageUrl, setImageUrl] = useState("");
