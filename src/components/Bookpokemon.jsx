@@ -6,7 +6,7 @@ function Bookpokemon({ name, image, id, isBookmarked, toggleBookmark }) {
           <div className=" h-28 flex justify-evenly items-center bg-black w-full rounded-lg">
                 
                             <Link to={`/pokemon/${id}`}>
-                                  <h1 className="flex justify-center items-center text-lg font-extrabold">
+                                  <h1 className="flex justify-center items-center text-xs md:text-lg lg:text-lg font-extrabold">
                                         {name.toUpperCase()}
                                   </h1>
                             </Link>
@@ -23,7 +23,7 @@ function Bookpokemon({ name, image, id, isBookmarked, toggleBookmark }) {
                                   )}
                             </button>
                             <img
-                                    className="w-20 h-20"
+                                    className="w-16 h-16 md:w-20 md:h-20 lg:w-20 lg:h-20"
                                     src={image}
                                     alt={name}
                               />

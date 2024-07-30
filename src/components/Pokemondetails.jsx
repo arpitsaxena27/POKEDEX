@@ -61,14 +61,14 @@ function Pokemondetails() {
             <>
                   <div className={`text-white ${color}bg flex p-5 flex-col gap-10 text-2xl`}>
                         <Link to={`http://localhost:5173/`}>
-                              <span className="material-symbols-outlined fixed ml-5 z-50 top-[40px]">
+                              <span className="material-symbols-outlined fixed ml-0 md:ml-5 lg:ml-5 z-50 top-[40px]">
                                     arrow_back
                               </span>
                         </Link>
                         <div className={`lg:hidden flex ${color}bg h-[380px] md:h-[430px] w-screen fixed left-0 top-0`}></div>
                         <div className="flex flex-col justify-center items-center gap-0 md:gap-10 lg:gap-10 mt-[-15px]">
-                              <div className="flex items-center gap-4 lg:relative fixed lg:top-0 top-7">
-                                    <h1 className="pl-20 text-3xl md:text-5xl lg:text-5xl">
+                              <div className="flex items-center gap-4 lg:relative fixed lg:top-0 top-9">
+                                    <h1 className="pl-10 md:pl-20 lg:pl-20 text-3xl md:text-5xl lg:text-5xl">
                                           {cardobj.name}
                                     </h1>
                                     <button
